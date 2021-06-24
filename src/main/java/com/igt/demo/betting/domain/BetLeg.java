@@ -18,7 +18,7 @@ public class BetLeg {
 	@Column(name = "price")
 	private BigDecimal price;
 
-	@Enumerated(EnumType.STRING) @Column(name = "result")
+	@Column(name = "result")
 	private SelectionResult result;
 
 	public BetLeg() {}

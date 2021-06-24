@@ -132,7 +132,6 @@ class BettingApplicationIT {
 		assertThat(bets[0].getId()).isEqualTo(betId);
 	}
 
-
 	@SneakyThrows
 	private void stubWalletPostTx() {
 		stubFor(post(urlEqualTo(WALLET_API_URL + "/postTx"))

@@ -1,14 +1,12 @@
 package com.igt.demo.betting.fixtures;
 
 import java.util.*;
-
 import javax.annotation.*;
 
 import com.igt.demo.betting.domain.*;
 import com.igt.demo.betting.domain.repository.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
-import org.springframework.transaction.annotation.*;
 
 import static com.igt.demo.betting.makers.EventMaker.*;
 
@@ -28,7 +26,7 @@ public class EventFixture {
 		return event;
 	}
 
-	@PreDestroy @Transactional
+	@PreDestroy
 	public void cleanUp() {
 		for (var eventId : eventIds)
 			eventRepository.deleteById(eventId);

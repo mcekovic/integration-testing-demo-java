@@ -24,6 +24,11 @@ public class BettingApiController {
 	@Autowired
 	private BetRepository betRepository;
 
+	@GetMapping(path = "/info", produces = MediaType.TEXT_PLAIN_VALUE)
+	public String info() {
+		return "Betting Service Demo";
+	}
+
 	@PostMapping(path = "/placeBet", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public long placeBet(@RequestBody PlaceBetRequest request) {
 		return placementService.placeBet(MAPPER.mapPlaceBetRequest(request));

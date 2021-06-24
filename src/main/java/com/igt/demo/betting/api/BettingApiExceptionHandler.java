@@ -1,5 +1,7 @@
 package com.igt.demo.betting.api;
 
+import javax.persistence.*;
+
 import com.igt.demo.betting.domain.*;
 import org.slf4j.*;
 import org.springframework.http.*;
@@ -26,9 +28,15 @@ public class BettingApiExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(th.getMessage());
 	}
 
+	@ExceptionHandler(EntityNotFoundException.class)
+	public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException ex, WebRequest request) {
+		LOGGER.error("Entity not found: " + request, ex);
+		return ResponseEntity.status(NOT_FOUND).body(ex.getMessage());
+	}
+
 	@ExceptionHandler(BetPlacementException.class)
 	public ResponseEntity<String> handleBetPlacementException(BetPlacementException ex, WebRequest request) {
-		LOGGER.error("Error processing request: " + request, ex);
+		LOGGER.warn("Bet placement exception: " + request, ex);
 		return ResponseEntity.status(BAD_REQUEST).body(ex.getMessage());
 	}
 }

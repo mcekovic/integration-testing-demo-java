@@ -16,7 +16,7 @@ public class Event {
 	@Column(name = "name")
 	private String name;
 
-	@Enumerated(EnumType.STRING) @Column(name = "state")
+	@Column(name = "state")
 	private BoState state;
 
 	@CreationTimestamp @Column(name = "created")

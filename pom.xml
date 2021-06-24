@@ -20,6 +20,7 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<postgresql.version>42.2.22</postgresql.version>
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
 		<feign.version>11.2</feign.version>
 		<testcontainers.version>1.15.3</testcontainers.version>
@@ -55,6 +56,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -123,6 +125,25 @@
 							<artifactId>mapstruct-processor</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>org.postgresql</groupId>
+						<artifactId>postgresql</artifactId>
+						<version>${postgresql.version}</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<url>jdbc:postgresql://localhost:5432/betting</url>
+					<user>betting</user>
+					<password>betting</password>
+					<locations>filesystem:src/main/resources/db/migration</locations>
+					<cleanOnValidationError>true</cleanOnValidationError>
+					<baselineOnMigrate>true</baselineOnMigrate>
 				</configuration>
 			</plugin>
 			<plugin>

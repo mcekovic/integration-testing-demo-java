@@ -26,10 +26,10 @@ public class Selection {
 	@Column(name = "price")
 	private BigDecimal price;
 
-	@Enumerated(EnumType.STRING) @Column(name = "state")
+	@Column(name = "state")
 	private BoState state;
 
-	@Enumerated(EnumType.STRING) @Column(name = "result")
+	@Column(name = "result")
 	private SelectionResult result;
 
 	@CreationTimestamp @Column(name = "created")

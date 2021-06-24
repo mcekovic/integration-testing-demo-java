@@ -14,7 +14,7 @@ public class Bet {
 	@Id @Column(name = "bet_id") @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Enumerated(EnumType.STRING) @Column(name = "bet_type")
+	@Column(name = "bet_type")
 	private BetType betType;
 
 	@Column(name = "stake")
@@ -26,7 +26,7 @@ public class Bet {
 	@Column(name = "return")
 	private BigDecimal _return;
 
-	@Enumerated(EnumType.STRING) @Column(name = "state")
+	@Column(name = "state")
 	private BetState state;
 
 	@Column(name = "player_id")

@@ -24,7 +24,7 @@ public class Market {
 	@Column(name = "name")
 	private String name;
 
-	@Enumerated(EnumType.STRING) @Column(name = "state")
+	@Column(name = "state")
 	private BoState state;
 
 	@OneToMany(mappedBy = "market", fetch = EAGER, cascade = ALL) @OrderBy("index")

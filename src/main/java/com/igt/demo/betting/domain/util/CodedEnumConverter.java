@@ -13,10 +13,12 @@ public abstract class CodedEnumConverter<E extends Enum<E> & Coded> implements A
 	}
 
 	@Override public String convertToDatabaseColumn(E codedEnum) {
-		return codedEnum.code();
+		return codedEnum != null ? codedEnum.code() : null;
 	}
 
 	@Override public E convertToEntityAttribute(String code) {
+		if (code == null)
+			return null;
 		for (E e : enumClass.getEnumConstants()) {
 			if (e.code().equals(code))
 				return e;

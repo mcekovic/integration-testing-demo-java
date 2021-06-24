@@ -2,9 +2,9 @@ CREATE TABLE event (
     event_id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     state TEXT NOT NULL,
-    created TIMESTAMP NOT NULL,
-    updated TIMESTAMP NOT NULL,
-    version INTEGER
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    version INTEGER DEFAULT 1
 );
 
 
@@ -13,9 +13,9 @@ CREATE TABLE market (
     event_id BIGINT NOT NULL REFERENCES event (event_id) ON DELETE CASCADE,
     name TEXT NOT NULL,
     state TEXT NOT NULL,
-    created TIMESTAMP NOT NULL,
-    updated TIMESTAMP NOT NULL,
-    version INTEGER
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    version INTEGER DEFAULT 1
 );
 
 CREATE INDEX market_event_idx ON market (event_id);
@@ -29,9 +29,9 @@ CREATE TABLE selection (
     price NUMERIC,
     state TEXT NOT NULL,
     result TEXT,
-    created TIMESTAMP NOT NULL,
-    updated TIMESTAMP NOT NULL,
-    version INTEGER,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    version INTEGER DEFAULT 1,
     UNIQUE (market_id, index)
 );
 
@@ -51,7 +51,7 @@ CREATE TABLE bet (
     attempted TIMESTAMP,
     placed TIMESTAMP,
     settled TIMESTAMP,
-    version INTEGER
+    version INTEGER DEFAULT 1
 );
 
 CREATE INDEX bet_player_idx ON bet (player_id);
