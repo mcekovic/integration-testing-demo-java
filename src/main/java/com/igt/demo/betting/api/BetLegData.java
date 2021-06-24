@@ -5,6 +5,7 @@ import java.math.*;
 import lombok.*;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class BetLegData {
 

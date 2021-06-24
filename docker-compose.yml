@@ -1,17 +1,32 @@
 version: "3.9"
 services:
   service:
+    image: demo/betting-service
+    container_name: betting-service
     ports:
       - "8080:8080"
     environment:
       spring.datasource.url: jdbc:postgresql://database:5432/betting
-      awesome.wallet.url: http://localhost:9090
-    image: demo/betting-service
+      awesome.wallet.url: http://wallet:8882
     links:
       - database
+      - wallet
     depends_on:
       - database
+      - wallet
   database:
+    image: demo/betting-db
+    container_name: betting-db
     ports:
       - "5433:5432"
-    image: demo/betting-db
+  wallet:
+    image: azagniotov/stubby4j:latest-jre11
+    container_name: betting-wallet-stub
+    volumes:
+      - "./src/test/resources/stubs/:/home/stubby4j/data"
+    ports:
+      - 8882:8882
+    environment:
+      YAML_CONFIG: awesome-wallet-stub.yaml
+      STUBS_PORT: 8882
+      WITH_WATCH: --watch

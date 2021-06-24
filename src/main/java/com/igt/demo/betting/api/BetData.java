@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class BetData {
 
