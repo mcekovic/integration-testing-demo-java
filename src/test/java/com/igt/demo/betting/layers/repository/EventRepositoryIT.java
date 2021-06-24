@@ -8,12 +8,14 @@ import com.igt.demo.betting.postgresql.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.autoconfigure.orm.jpa.*;
+import org.springframework.context.annotation.*;
 
 import static com.igt.demo.betting.makers.EventMaker.*;
 import static org.assertj.core.api.Assertions.*;
 
 @PostgreSQLTest
 @DataJpaTest
+@ComponentScan(basePackages = "com.igt.demo.betting.fixtures")
 class EventRepositoryIT {
 
 	@Autowired
