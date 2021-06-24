@@ -102,4 +102,5 @@ public class Market {
 
 	public int getVersion() {
 		return version;
-	}}
+	}
+}

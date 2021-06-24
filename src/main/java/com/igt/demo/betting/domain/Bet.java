@@ -170,6 +170,23 @@ public class Bet {
 		betType = legs.size() == 1 ? BetType.SINGLE : BetType.ACCUMULATOR;
 	}
 
+	public void calculateMaxReturn() {
+		maxReturn = stake.multiply(calculateCumulativePrice());
+	}
+
+	private BigDecimal calculateCumulativePrice() {
+		switch (betType) {
+			case SINGLE:
+				return legs.get(0).getPrice();
+			case ACCUMULATOR:
+				return legs.stream()
+					.map(BetLeg::getPrice)
+					.reduce(BigDecimal.ONE, BigDecimal::multiply);
+			default:
+				throw new IllegalStateException();
+		}
+	}
+
 	public void place() {
 		state = BetState.OPEN;
 		placed = LocalDateTime.now();
@@ -177,8 +194,7 @@ public class Bet {
 
 	public BigDecimal settle() {
 		var price = BigDecimal.ONE;
-		loop:
-		for (var leg : legs) {
+		loop: for (var leg : legs) {
 			var result = leg.getResult();
 			if (result == null) {
 				state = BetState.OPEN;
@@ -200,22 +216,5 @@ public class Bet {
 		state = BetState.SETTLED;
 		settled = LocalDateTime.now();
 		return _return;
-	}
-
-	public void calculateMaxReturn() {
-		maxReturn = stake.multiply(calculateCumulativePrice());
-	}
-
-	private BigDecimal calculateCumulativePrice() {
-		switch (betType) {
-			case SINGLE:
-				return legs.get(0).getPrice();
-			case ACCUMULATOR:
-				return legs.stream()
-						.map(BetLeg::getPrice)
-						.reduce(BigDecimal.ONE, BigDecimal::multiply);
-			default:
-				throw new IllegalStateException();
-		}
 	}
 }
