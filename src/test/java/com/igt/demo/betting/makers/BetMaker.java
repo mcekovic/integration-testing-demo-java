@@ -13,7 +13,7 @@ public abstract class BetMaker {
 		));
 		bet.setMaxReturn(new BigDecimal("20"));
 		bet.setPlayerId(123L);
-		bet.attempt();
+		bet.place();
 		return bet;
 	}
 }

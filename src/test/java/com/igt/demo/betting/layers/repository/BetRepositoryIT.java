@@ -57,7 +57,7 @@ class BetRepositoryIT {
 
 		var savedBet = betRepository.getById(bet.getId());
 		var version = savedBet.getVersion();
-		savedBet.setState(BetState.OPEN);
+		savedBet.setState(BetState.SETTLED);
 		betRepository.save(savedBet);
 		betRepository.flush();
 
