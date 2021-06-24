@@ -36,11 +36,6 @@ class MarketRepositoryIT {
 		eventId = eventFixture.createEvent().getId();
 	}
 
-	@AfterAll
-	void tearDown() {
-		eventId = eventFixture.createEvent().getId();
-	}
-
 	@Test
 	void marketIsCreated() {
 		var market = makeMarket(eventId);

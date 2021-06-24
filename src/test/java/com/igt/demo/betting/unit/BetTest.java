@@ -79,6 +79,7 @@ class BetTest {
 			new BetLeg(2, 2L, 21L, new BigDecimal("3"))
 		));
 		bet.getLeg(1).setResult(SelectionResult.WON);
+		bet.setState(BetState.SETTLED);
 
 		var _return = bet.settle();
 

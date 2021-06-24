@@ -194,27 +194,41 @@ public class Bet {
 
 	public BigDecimal settle() {
 		var price = BigDecimal.ONE;
+		var settled = true;
 		loop: for (var leg : legs) {
 			var result = leg.getResult();
-			if (result == null) {
-				state = BetState.OPEN;
-				return null;
+			if (result != null) {
+				switch (result) {
+					case WON:
+						price = price.multiply(leg.getPrice());
+						break;
+					case VOID:
+						// Do nothing
+						break;
+					case LOST:
+						price = BigDecimal.ZERO;
+						break loop;
+				}
 			}
-			switch (result) {
-				case WON:
-					price = price.multiply(leg.getPrice());
-					break;
-				case VOID:
-					// Do nothing
-					break;
-				case LOST:
-					price = BigDecimal.ZERO;
-					break loop;
-			}
+			else
+				settled = false;
 		}
-		_return = stake.multiply(price);
+		if (settled)
+			settle(stake.multiply(price));
+		else
+			open();
+		return _return;
+	}
+
+	private void settle(BigDecimal _return) {
+		this._return = _return;
 		state = BetState.SETTLED;
 		settled = LocalDateTime.now();
-		return _return;
+	}
+
+	private void open() {
+		_return = null;
+		state = BetState.OPEN;
+		settled = null;
 	}
 }
