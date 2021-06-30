@@ -1,4 +1,4 @@
-package com.igt.demo.betting.contract.consumer.betting;
+package com.igt.demo.betting.contract.consumer;
 
 import java.math.*;
 import java.util.*;
