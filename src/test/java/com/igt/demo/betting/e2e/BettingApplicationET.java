@@ -30,8 +30,8 @@ class BettingApplicationET {
 
 	@Test @Order(1)
 	void betIsPlaced() {
-		var bet = new PlaceBetRequest(new BigDecimal("10"), new BigDecimal("28.7"), PLAYER_ID, List.of(
-			new PlaceBetLeg(1L, 2L, new BigDecimal("2.87"))
+		var bet = new PlaceBetRequest(new BigDecimal("10"), new BigDecimal("75"), PLAYER_ID, List.of(
+			new PlaceBetLeg(1L, 2L, new BigDecimal("7.5"))
 		));
 
 		betId = client.placeBet(bet).getBetId();
