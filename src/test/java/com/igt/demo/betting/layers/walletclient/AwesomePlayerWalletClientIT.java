@@ -28,7 +28,7 @@ class AwesomePlayerWalletClientIT {
 	@BeforeAll
 	void setUp () {
 		mapper = new ObjectMapper();
-		client = AwesomePlayerWalletClient.client("http://localhost:" + WireMockExtension.port());
+		client = AwesomePlayerWalletClient.client(WireMockExtension.baseUrl());
 	}
 
 	@Test

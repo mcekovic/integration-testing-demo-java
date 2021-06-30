@@ -36,8 +36,7 @@ class BettingApplicationIT {
 
 	static class AwesomeWalletInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 		@Override public void initialize(ConfigurableApplicationContext context) {
-			int port = WireMockExtension.port();
-			TestPropertyValues.of("awesome.wallet.url=http://localhost:" + port)
+			TestPropertyValues.of("awesome.wallet.url=" + WireMockExtension.baseUrl())
 				.applyTo(context.getEnvironment());
 		}
 	}

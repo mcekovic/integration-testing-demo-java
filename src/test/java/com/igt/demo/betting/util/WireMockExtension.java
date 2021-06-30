@@ -17,8 +17,8 @@ public class WireMockExtension implements TestInstancePostProcessor, BeforeEachC
 		return server;
 	}
 
-	public static int port() {
-		return getWireMockServer().port();
+	public static String baseUrl() {
+		return getWireMockServer().baseUrl();
 	}
 
 	private static final ExtensionContext.Namespace NAMESPACE = ExtensionContext.Namespace.create(WireMockExtension.class);
