@@ -55,8 +55,8 @@ class MarketRepositoryIT {
 		var savedMarket = marketRepository.getById(market.getId());
 		var version = savedMarket.getVersion();
 		savedMarket.setState(BoState.SUSPENDED);
-		savedMarket.getSelectionByIndex(1).setPrice(new BigDecimal("2.87"));
-		savedMarket.getSelectionByIndex(2).setPrice(new BigDecimal("2.62"));
+		savedMarket.getSelectionByIndex(1).setPrice(new BigDecimal("1.5"));
+		savedMarket.getSelectionByIndex(2).setPrice(new BigDecimal("6"));
 		marketRepository.save(savedMarket);
 		marketRepository.flush();
 

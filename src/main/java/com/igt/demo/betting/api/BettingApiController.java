@@ -30,16 +30,18 @@ public class BettingApiController {
 	}
 
 	@PostMapping(path = "/placeBet", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public long placeBet(@RequestBody PlaceBetRequest request) {
-		return placementService.placeBet(MAPPER.mapPlaceBetRequest(request));
+	public PlaceBetResponse placeBet(@RequestBody PlaceBetRequest request) {
+		var bet = MAPPER.mapPlaceBetRequest(request);
+		placementService.placeBet(bet);
+		return new PlaceBetResponse(bet);
 	}
 
-	@PostMapping(path = "/settleMarketBets", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/settleMarketBets", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public SettlementResult settleMarketBets(@RequestBody SettlementRequest request) {
 		return settlementService.settleMarketBets(request.getMarketId());
 	}
 
-	@GetMapping(path = "/playerBets", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/playerBets")
 	public List<BetData> playerBets(@RequestParam("playerId") long playerId) {
 		return MAPPER.mapBets(betRepository.findAllByPlayerId(playerId));
 	}

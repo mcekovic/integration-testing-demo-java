@@ -95,11 +95,10 @@ class BettingApplicationIT {
 		));
 		stubWalletPostTx();
 
-		var response = restTemplate.postForEntity(BETTING_API_URL + "/placeBet", request, Long.class);
+		var response = restTemplate.postForEntity(BETTING_API_URL + "/placeBet", request, PlaceBetResponse.class);
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		betId = response.getBody();
-		assertThat(betId).isNotNull();
+		betId = response.getBody().getBetId();
 		assertThat(betId).isNotNegative();
 	}
 

@@ -23,7 +23,7 @@ public class BetPlacementService {
 		this.wallet = wallet;
 	}
 
-	public long placeBet(Bet bet) {
+	public void placeBet(Bet bet) {
 		var stake = bet.getStake();
 		if (stake == null || stake.signum() <= 0)
 			throw new BetPlacementException("Bet stake %1$f must be positive", stake);
@@ -42,7 +42,6 @@ public class BetPlacementService {
 
 		bet.place();
 		betRepository.save(bet);
-		return bet.getId();
 	}
 
 	private void checkIfLegIsPlaceable(BetLeg leg) {

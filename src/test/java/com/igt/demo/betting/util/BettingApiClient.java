@@ -1,4 +1,4 @@
-package com.igt.demo.betting.e2e;
+package com.igt.demo.betting.util;
 
 import java.util.*;
 
@@ -8,14 +8,15 @@ import com.igt.demo.betting.api.*;
 import feign.*;
 import feign.jackson.*;
 
+import static org.apache.http.HttpHeaders.*;
+
 public interface BettingApiClient {
 
 	String BETTING_API_URL = "/v1/betting";
-	String CONTENT_TYPE_APPLICATION_JSON = "Content-Type: application/json";
 
 	@RequestLine("POST " + BETTING_API_URL + "/placeBet")
-	@Headers(CONTENT_TYPE_APPLICATION_JSON)
-	long placeBet(PlaceBetRequest bet);
+	@Headers(CONTENT_TYPE  + ": application/json")
+	PlaceBetResponse placeBet(PlaceBetRequest bet);
 
 	@RequestLine("GET " + BETTING_API_URL + "/playerBets?playerId={playerId}")
 	List<BetData> playerBets(

@@ -5,6 +5,7 @@ import java.math.*;
 import java.util.*;
 
 import com.igt.demo.betting.api.*;
+import com.igt.demo.betting.util.*;
 import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.*;
@@ -12,7 +13,7 @@ import static org.assertj.core.api.Assertions.*;
 @Tag("E2E")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class BettingApplicationE2ET {
+class BettingApplicationET {
 
 	private static final long PLAYER_ID = 123L;
 
@@ -21,8 +22,9 @@ class BettingApplicationE2ET {
 
 	@BeforeAll
 	void setUp() throws IOException {
-		SqlExec.sqlExec("db/e2e/clean-up.sql");
-		SqlExec.sqlExec("db/e2e/initial-load.sql");
+		var sql = new SqlExec("jdbc:postgresql://localhost:5433/betting", "betting", "betting");
+		sql.execute("db/e2e/clean-up.sql");
+		sql.execute("db/e2e/initial-load.sql");
 		client = BettingApiClient.client("http://localhost:8080");
 	}
 
@@ -32,7 +34,7 @@ class BettingApplicationE2ET {
 			new PlaceBetLeg(1L, 2L, new BigDecimal("2.87"))
 		));
 
-		betId = client.placeBet(bet);
+		betId = client.placeBet(bet).getBetId();
 
 		assertThat(betId).isNotNegative();
 	}

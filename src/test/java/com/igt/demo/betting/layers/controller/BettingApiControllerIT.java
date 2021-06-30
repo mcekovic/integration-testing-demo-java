@@ -46,7 +46,12 @@ class BettingApiControllerIT {
 			new PlaceBetLeg(1L, 11L, new BigDecimal("2"))
 		));
 		var betId = 1234L;
-		when(placementService.placeBet(any(Bet.class))).thenReturn(betId);
+		doAnswer(invocation -> {
+			var aBet = (Bet) invocation.getArguments()[0];
+			aBet.setId(betId);
+			return aBet;
+		}).when(placementService).placeBet(any(Bet.class));
+		var response = new PlaceBetResponse(betId, request.getMaxReturn());
 
 		mockMvc.perform(
 			post(BETTING_API_URL + "/placeBet")
@@ -55,7 +60,7 @@ class BettingApiControllerIT {
 			)
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-			.andExpect(content().string(String.valueOf(betId))
+			.andExpect(content().string(objectMapper.writeValueAsString(response))
 		);
 	}
 
@@ -65,7 +70,8 @@ class BettingApiControllerIT {
 			new PlaceBetLeg(1L, 11L, new BigDecimal("2"))
 		));
 		var message = "Booom!!!";
-		when(placementService.placeBet(any(Bet.class))).thenThrow(new BetPlacementException(message));
+		doThrow(new BetPlacementException(message))
+			.when(placementService).placeBet(any(Bet.class));
 
 		mockMvc.perform(
 			post(BETTING_API_URL + "/placeBet")

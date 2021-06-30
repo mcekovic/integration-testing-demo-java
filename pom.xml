@@ -26,6 +26,7 @@
 		<testcontainers.version>1.15.3</testcontainers.version>
 		<wiremock.version>2.27.2</wiremock.version>
 		<jacoco.version>0.8.7</jacoco.version>
+		<pact.version>4.2.7</pact.version>
 	</properties>
 
 	<dependencyManagement>
@@ -106,6 +107,30 @@
 			<artifactId>wiremock-jre8</artifactId>
 			<version>${wiremock.version}</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>au.com.dius.pact.consumer</groupId>
+			<artifactId>junit5</artifactId>
+			<version>${pact.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>json</artifactId>
+					<groupId>org.json</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>au.com.dius.pact.provider</groupId>
+			<artifactId>junit5spring</artifactId>
+			<version>${pact.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>json</artifactId>
+					<groupId>org.json</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 
