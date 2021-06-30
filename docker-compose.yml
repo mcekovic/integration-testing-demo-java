@@ -7,7 +7,7 @@ services:
       - "8080:8080"
     environment:
       spring.datasource.url: jdbc:postgresql://database:5432/betting
-      awesome.wallet.url: http://wallet:8882
+      awesome.wallet.url: http://wallet:8080
     links:
       - database
       - wallet
@@ -20,13 +20,9 @@ services:
     ports:
       - "5433:5432"
   wallet:
-    image: azagniotov/stubby4j:latest-jre11
+    image: rodolpheche/wiremock
     container_name: betting-wallet-stub
     volumes:
-      - "./src/test/resources/stubs/:/home/stubby4j/data"
+      - "./src/test/resources/stubs/:/home/wiremock"
     ports:
-      - 8882:8882
-    environment:
-      YAML_CONFIG: awesome-wallet-stub.yaml
-      STUBS_PORT: 8882
-      WITH_WATCH: --watch
+      - 8082:8080

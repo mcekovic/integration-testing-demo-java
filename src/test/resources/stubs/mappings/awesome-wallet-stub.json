@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/v1/wallet/postTx"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "txReference": "ABCDMACAPREDEAMISMOTAOKOPLOTA"
+    }
+  }
+}

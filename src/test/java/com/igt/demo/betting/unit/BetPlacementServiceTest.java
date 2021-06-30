@@ -49,7 +49,7 @@ class BetPlacementServiceTest {
 			aBet.setId(123L);
 			return aBet;
 		});
-		when(wallet.postTx(eq(bet.getPlayerId()), any(BigDecimal.class))).thenReturn("ABCDMACAPREDE");
+		when(wallet.postTx(eq(bet.getPlayerId()), any(BigDecimal.class))).thenReturn("ABCDMACAPREDEAMISMOTAOKOPLOTA");
 		var placementService = new BetPlacementService(betRepository, eventRepository, marketRepository, wallet);
 
 		placementService.placeBet(bet);
