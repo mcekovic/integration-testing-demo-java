@@ -2,7 +2,6 @@ package com.igt.demo.betting.domain.service;
 
 import com.igt.demo.betting.domain.*;
 import com.igt.demo.betting.domain.repository.*;
-import com.igt.demo.betting.wallet.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
@@ -33,9 +32,7 @@ public class BetPlacementService {
 		bet.getLegs().forEach(this::checkIfLegIsPlaceable);
 		var channelMaxReturn = bet.getMaxReturn();
 
-		bet.calculateMaxReturn();
-		if (channelMaxReturn != null && channelMaxReturn.compareTo(bet.getMaxReturn()) != 0)
-			throw new BetPlacementException("Bet maxReturn %1$f is not the same as calculated maxReturn %2$f", channelMaxReturn, bet.getMaxReturn());
+		bet.checkMaxReturn(channelMaxReturn);
 
 		var txReference = wallet.postTx(bet.getPlayerId(), bet.getStake().negate());
 		bet.setStakeTxReference(txReference);

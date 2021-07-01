@@ -8,30 +8,22 @@ import com.igt.demo.betting.api.*;
 import com.igt.demo.betting.domain.repository.*;
 import com.igt.demo.betting.domain.service.*;
 import com.igt.demo.betting.fixtures.*;
-import com.igt.demo.betting.postgresql.*;
 import com.igt.demo.betting.util.*;
 import com.igt.demo.betting.wallet.*;
 import lombok.*;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.boot.test.context.*;
 import org.springframework.boot.test.util.*;
 import org.springframework.boot.test.web.client.*;
 import org.springframework.context.*;
 import org.springframework.http.*;
-import org.springframework.test.context.*;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.apache.http.HttpHeaders.*;
 import static org.apache.http.entity.ContentType.*;
 import static org.assertj.core.api.Assertions.*;
 
-@PostgreSQLTest
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ExtendWith(WireMockExtension.class)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@ContextConfiguration(initializers = BettingApplicationIT.AwesomeWalletInitializer.class)
+@ComponentTest
 class BettingApplicationIT {
 
 	static class AwesomeWalletInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {

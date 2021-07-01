@@ -3,7 +3,6 @@ package com.igt.demo.betting.domain.service;
 import com.igt.demo.betting.api.*;
 import com.igt.demo.betting.domain.*;
 import com.igt.demo.betting.domain.repository.*;
-import com.igt.demo.betting.wallet.*;
 import lombok.extern.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;

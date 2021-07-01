@@ -2,6 +2,7 @@ package com.igt.demo.betting.wallet;
 
 import java.math.*;
 
+import com.igt.demo.betting.domain.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 

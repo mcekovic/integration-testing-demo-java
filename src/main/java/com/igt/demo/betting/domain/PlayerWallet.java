@@ -1,4 +1,4 @@
-package com.igt.demo.betting.wallet;
+package com.igt.demo.betting.domain;
 
 import java.math.*;
 

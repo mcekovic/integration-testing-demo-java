@@ -187,6 +187,12 @@ public class Bet {
 		}
 	}
 
+	public void checkMaxReturn(BigDecimal channelMaxReturn) {
+		calculateMaxReturn();
+		if (channelMaxReturn != null && channelMaxReturn.compareTo(getMaxReturn()) != 0)
+			throw new BetPlacementException("Bet maxReturn %1$f is not the same as calculated maxReturn %2$f", channelMaxReturn, getMaxReturn());
+	}
+
 	public void place() {
 		state = BetState.OPEN;
 		placed = LocalDateTime.now();

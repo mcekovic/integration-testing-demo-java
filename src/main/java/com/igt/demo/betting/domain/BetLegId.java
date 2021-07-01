@@ -13,13 +13,6 @@ public class BetLegId implements Serializable {
 	@Column(name = "index")
 	private int index;
 
-	public BetLegId() {}
-
-	public BetLegId(Bet bet, int index) {
-		this.bet = bet;
-		this.index = index;
-	}
-
 	public Bet getBet() {
 		return bet;
 	}
