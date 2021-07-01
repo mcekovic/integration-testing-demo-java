@@ -187,10 +187,11 @@ public class Bet {
 		}
 	}
 
-	public void checkMaxReturn(BigDecimal channelMaxReturn) {
+	public void checkMaxReturn() {
+		var originalMaxReturn = maxReturn;
 		calculateMaxReturn();
-		if (channelMaxReturn != null && channelMaxReturn.compareTo(getMaxReturn()) != 0)
-			throw new BetPlacementException("Bet maxReturn %1$f is not the same as calculated maxReturn %2$f", channelMaxReturn, getMaxReturn());
+		if (originalMaxReturn != null && originalMaxReturn.compareTo(getMaxReturn()) != 0)
+			throw new BetPlacementException("Bet maxReturn %1$f is not the same as calculated maxReturn %2$f", originalMaxReturn, getMaxReturn());
 	}
 
 	public void place() {

@@ -30,10 +30,7 @@ public class BetPlacementService {
 		bet.attempt();
 
 		bet.getLegs().forEach(this::checkIfLegIsPlaceable);
-		var channelMaxReturn = bet.getMaxReturn();
-
-		bet.checkMaxReturn(channelMaxReturn);
-
+		bet.checkMaxReturn();
 		var txReference = wallet.postTx(bet.getPlayerId(), bet.getStake().negate());
 		bet.setStakeTxReference(txReference);
 
