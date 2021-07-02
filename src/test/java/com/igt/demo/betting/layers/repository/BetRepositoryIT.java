@@ -3,18 +3,13 @@ package com.igt.demo.betting.layers.repository;
 import com.igt.demo.betting.domain.*;
 import com.igt.demo.betting.domain.repository.*;
 import com.igt.demo.betting.fixtures.*;
-import com.igt.demo.betting.postgresql.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.boot.test.autoconfigure.orm.jpa.*;
-import org.springframework.context.annotation.*;
 
 import static com.igt.demo.betting.makers.BetMaker.*;
 import static org.assertj.core.api.Assertions.*;
 
-@PostgreSQLTest
-@DataJpaTest
-@ComponentScan(basePackages = "com.igt.demo.betting.fixtures")
+@RepositoryTest
 class BetRepositoryIT {
 
 	@Autowired
