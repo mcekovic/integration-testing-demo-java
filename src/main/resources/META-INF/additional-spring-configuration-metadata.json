@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "wallet.type",
+      "type": "java.lang.String",
+      "description": "Wallet type: 'awesome' (default) or 'db'"
+    },
+    {
+      "name": "awesome.wallet.url",
+      "type": "java.lang.String",
+      "description": "Awesome Wallet URL"
+    }
+  ]
+}

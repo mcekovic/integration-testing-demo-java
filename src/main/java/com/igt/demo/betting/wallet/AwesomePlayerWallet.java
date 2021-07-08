@@ -4,12 +4,14 @@ import java.math.*;
 
 import com.igt.demo.betting.domain.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.stereotype.*;
 
 @Component
+@ConditionalOnProperty(name = "wallet.type", havingValue = "awesome")
 public class AwesomePlayerWallet implements PlayerWallet {
 
-	private AwesomePlayerWalletClient client;
+	private final AwesomePlayerWalletClient client;
 
 	@Autowired
 	public AwesomePlayerWallet(@Value("${awesome.wallet.url}") String uri) {
